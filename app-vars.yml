@@ -1,12 +1,12 @@
 ---
-app_name:           YOUR_APP_NAME
+app_name:           "My-Gin"
 deploy_user:        deployer
 deploy_group:       "{{ deploy_user }}"
 deploy_user_path:   "/home/{{ deploy_user }}"
 
 # App Git repo
-app_git_repo:       "YOUR_GIT_REPO"
-app_git_branch:     "master"
+app_git_repo:       "https://github.com/Pleskan/my-gin"
+app_git_branch:     "main"
 
 # Rails app
 app_root_path:      "{{ deploy_user_path }}/{{ app_name }}"
@@ -67,13 +67,13 @@ required_packages:
   - bison
   - libreadline6-dev
   - libncurses5-dev
-  - libgdbm5 
+  - libgdbm6
   - libgdbm-dev
   - libpq-dev # postgresql client
   - libjemalloc-dev # jemalloc
 
 # Ruby
-ruby_version: 2.6.6
+ruby_version: 2.7.2
 rbenv_ruby_configure_opts: "RUBY_CONFIGURE_OPTS=--with-jemalloc"
 rbenv_root_path: "{{ deploy_user_path }}/.rbenv"
 rbenv_shell_rc_path: "{{ deploy_user_path }}/.bashrc"
@@ -86,7 +86,7 @@ rbenv_bundle: "{{ rbenv_root_path }}/shims/bundle"
 nodejs_version: "12.x"
 
 # Postgresql
-postgresql_version: "9.6"
+postgresql_version: "12.22"
 postgresql_db_user: "{{ deploy_user }}_postgresql_user"
 postgresql_db_password: "{{ vault_postgresql_db_password }}" # from vault
 postgresql_db_name: "{{ app_name }}_production"
@@ -148,5 +148,4 @@ logrotate_conf:
         compress
         delaycompress
         notifempty
-        copytruncate
-      }
+        copytruncate }
