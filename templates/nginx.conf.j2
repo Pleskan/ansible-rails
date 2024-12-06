@@ -1,6 +1,6 @@
 upstream app {
     # Path to Puma SOCK file, as defined previously
-    server unix:///{{ puma_socket }} fail_timeout=0;
+    server localhost:3000
 }
 
 server {
